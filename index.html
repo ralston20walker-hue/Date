@@ -250,6 +250,7 @@
     moveNoBtn();
 
     noBtn.addEventListener('mouseover', moveNoBtn);
+    noBtn.addEventListener('touchstart', function(e) { e.preventDefault(); moveNoBtn(); }, { passive: false });
     window.addEventListener('resize', moveNoBtn);
 
     function sayYes() {
