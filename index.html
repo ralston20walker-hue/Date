@@ -223,10 +223,13 @@
     ];
 
     function moveNoBtn() {
-      const maxX = window.innerWidth  - noBtn.offsetWidth  - 20;
-      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-      noBtn.style.left = Math.max(10, Math.random() * maxX) + 'px';
-      noBtn.style.top  = Math.max(10, Math.random() * maxY) + 'px';
+      const pad = 10;
+      const w = noBtn.offsetWidth;
+      const h = noBtn.offsetHeight;
+      const maxLeft = Math.max(pad, window.innerWidth  - w - pad);
+      const maxTop  = Math.max(pad, window.innerHeight - h - pad);
+      noBtn.style.left = (pad + Math.random() * (maxLeft - pad)) + 'px';
+      noBtn.style.top  = (pad + Math.random() * (maxTop  - pad)) + 'px';
     }
 
     function runAway() {
@@ -246,6 +249,7 @@
     moveNoBtn();
 
     noBtn.addEventListener('mouseover', moveNoBtn);
+    window.addEventListener('resize', moveNoBtn);
 
     function sayYes() {
       document.getElementById('btn-area').style.display = 'none';
