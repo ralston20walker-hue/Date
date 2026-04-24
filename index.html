@@ -175,7 +175,12 @@
       <span class="big-emoji">🎉💖🎉</span>
       <h2>Yay! It's a date!</h2>
       <p>I can't wait to see you! 🌹✨</p>
-      <p id="date-idea" style="margin-top:0.5rem; font-style:italic; color:#b5548a;"></p>
+      <p style="margin-top:0.75rem; font-size:1.2rem; color:#d63384; font-weight:700;">Where? 🥺</p>
+      <div class="buttons" id="where-btns" style="margin-top:0.5rem;">
+        <button id="dinner-btn" onclick="pickPlace('dinner')" style="background:linear-gradient(135deg,#ff6eb4,#d63384);color:#fff;box-shadow:0 6px 20px rgba(214,51,132,0.4);">Dinner? 🍽️</button>
+        <button id="other-btn" onclick="pickPlace('other')" style="background:#f0e0e8;color:#9b5e7a;box-shadow:0 4px 12px rgba(0,0,0,0.08);">Surprise me! ✨</button>
+      </div>
+      <p id="date-idea" style="margin-top:0.5rem; font-style:italic; color:#b5548a; display:none;"></p>
     </div>
   </div>
 
@@ -233,10 +238,7 @@
       // Update subtitle with a pleading message
       const msg = pleadingMessages[Math.min(noClickCount, pleadingMessages.length - 1)];
       subtitle.textContent = msg;
-      if (noClickCount >= 5) {
-        noBtn.style.opacity = '0';
-        noBtn.style.pointerEvents = 'none';
-      }
+
     }
 
     noBtn.addEventListener('mouseover', moveNoBtn);
@@ -245,9 +247,6 @@
       document.getElementById('btn-area').style.display = 'none';
       const res = document.getElementById('yes-response');
       res.style.display = 'flex';
-      // Show a random date idea
-      const idea = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
-      document.getElementById('date-idea').textContent = idea;
       // burst hearts
       for (let i = 0; i < 25; i++) {
         const el = document.createElement('span');
@@ -258,6 +257,18 @@
         el.style.animationDelay = (Math.random() * 0.6) + 's';
         hbg.appendChild(el);
       }
+    }
+
+    function pickPlace(choice) {
+      document.getElementById('where-btns').style.display = 'none';
+      const ideaEl = document.getElementById('date-idea');
+      if (choice === 'dinner') {
+        ideaEl.textContent = 'Perfect! Dinner it is 🍽️💕 I know just the place!';
+      } else {
+        const idea = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
+        ideaEl.textContent = idea;
+      }
+      ideaEl.style.display = 'block';
     }
   </script>
 </body>
